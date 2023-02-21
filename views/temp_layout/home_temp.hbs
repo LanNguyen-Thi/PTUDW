@@ -1,0 +1,373 @@
+{{#section 'header'}}
+<link rel=" stylesheet" href="/css/styles.css" />
+<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<link href="/css/rating.css" rel="stylesheet">
+{{/section}}
+{{#section 'footer'}}
+<script>
+  $('.addCourse').on('click', function () {
+    const id = $(this).data('id');
+    $('#IdKhoaHoc').val(id);
+    $('#frmAddCourse').submit();
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+<script>
+  $('.addWishList').on('click', function () {
+    const id = $(this).data('id');
+    $('#IdKhoaHoc-WishList').val(id);
+    $('#frmAddWishList').submit();
+  });
+</script>
+<script>
+  $(".rating").each(function () {
+    var newoptions = {
+      max_value: 5,
+      step_size: 0.5,
+      readonly: true,
+      initial_value: $(this).attr('value'),
+    }
+    $(this).rate(newoptions);
+  });
+</script>
+
+{{/section}}
+<!--Main body-->
+
+<div class="container border-bottom pb-5 mt-5">
+  <div class="row">
+
+    <div class="col-12 col-sm-3">
+      <div class="card bg-light mb-3">
+        <div class="card-header text-white text-uppercase" style="background-color: #051f3f;"><i class="fa fa-list"></i>
+          Categories</div>
+        <ul class="list-group category_block dropdown-level-1">
+          {{#each lcCategories}}
+          <li class="list-group-item">
+            <div class="dropdown navbar">
+              <a type="button" id="dropdownMenu{{idLinhVuc}}" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"><i class="fa fa-chevron-right" aria-hidden="true"></i>{{TenLinhVuc}}</a>
+              <div class="dropdown-menu dropdown-primary dropdown-level-2">
+                {{#each level2}}
+                <a class="dropdown-item" href="/courses/{{idLinhVucCap2}}">{{TenLinhVucCap2}}</a>
+                {{/each}}
+              </div>
+            </div>
+          </li>
+          {{/each}}
+
+        </ul>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="col-12">
+          <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+            <!--Indicators-->
+            <ol class="carousel-indicators">
+              <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+              <li data-target="#carousel-example-2" data-slide-to="1"></li>
+              <li data-target="#carousel-example-2" data-slide-to="2"></li>
+            </ol>
+            <!--/.Indicators-->
+            <!--Slides-->
+            <div class="carousel-inner" role="listbox">
+              <div class="carousel-item active">
+                <div class="view">
+                  <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg"
+                    alt="First slide">
+                  <div class="mask rgba-black-light"></div>
+                </div>
+                <div class="carousel-caption">
+                  <h3 class="h3-responsive">Light mask</h3>
+                  <p>First text</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <!--Mask color-->
+                <div class="view">
+                  <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(6).jpg"
+                    alt="Second slide">
+                  <div class="mask rgba-black-strong"></div>
+                </div>
+                <div class="carousel-caption">
+                  <h3 class="h3-responsive">Strong mask</h3>
+                  <p>Secondary text</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <!--Mask color-->
+                <div class="view">
+                  <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(9).jpg"
+                    alt="Third slide">
+                  <div class="mask rgba-black-slight"></div>
+                </div>
+                <div class="carousel-caption">
+                  <h3 class="h3-responsive">Slight mask</h3>
+                  <p>Third text</p>
+                </div>
+              </div>
+            </div>
+            <!--/.Slides-->
+            <!--Controls-->
+            <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+            <!--/.Controls-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Form add wishList-->
+<form action="/user/my-watchlist/add" method="post" id="frmAddWishList">
+  <input type="hidden" name="IdKhoaHoc" id="IdKhoaHoc-WishList">
+  <input type="hidden" name="idHocVien" id="idHocVien-WishList" value="{{stuAccount.idHocVien}}">
+</form>
+<!--Add add wishList .//-->
+
+
+<!-- Danh sach top 10 khoa hoc được xem nhiều nhất-->
+<div class="container-xl mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="d-flex justify-content-center"><b>Popular Courses</b></h2>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+        <!-- Wrapper for carousel items -->
+        <div class="carousel-inner">
+          {{#grouped_each 4 topViewers}}
+          <div class="item carousel-item viewer-carousel">
+            <div class="row">
+              {{#each this }}
+              <!--Form add cart-->
+              <form action="/cart/add" method="post" id="frmAddCourse">
+                <input type="hidden" name="IdKhoaHoc" id="IdKhoaHoc">
+
+              </form>
+              <!--Add cart .//-->
+
+              <div class="col-sm-3">
+                <div class="thumb-wrapper">
+                  <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                  <div class="img-box">
+                    <a href="/detail-course/{{IdKhoaHoc}}"><img src="../img/onlCourse.jpg" class="img-fluid"
+                        alt="course-{{IdKhoaHoc}}"></a>
+                  </div>
+                  <div class="thumb-content">
+                    <h4 class="text-truncate"><b>{{TenKhoaHoc}}</b></h4>
+                    <h6 class="text-muted">{{TenGiangVien}}</h6>
+                    <span class="badge badge-danger ml-3"><i class="far fa-clock pr-1"></i>MOST VIEWERS</span>
+                    <div class="d-flex d-inline-block justify-content-center">
+                      <div class="rating" style="font-size: 20px;" value="{{DiemDanhGia}}" id="rating{{IdKhoaHoc}}">
+                      </div>
+                      <span>({{SoLuongHVDanhGia}}<i class="fa fa-user-o" aria-hidden="true"></i>)</span>
+                    </div>
+                    <p class="item-price"><span
+                        class="text-danger"><strike>${{HocPhi}}</strike></span><b>${{giaMoi}}</b></p>
+                    <p class="font-weight-bold">{{TenLinhVuc}}</p>
+                    {{#if ../../accounttype}}
+                    <a data-id="{{IdKhoaHoc}}" href="javascript:;" role="button" class="btn btn-info addCourse"><i
+                        class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                    <a data-id="{{IdKhoaHoc}}" href="javascript:;" role="button" class="btn btn-danger addWishList"><i
+                        class="fa fa-heart" aria-hidden="true"></i></a>
+                    {{else}}
+                    <a data-id="{{IdKhoaHoc}}" href="javascript:;" role="button"
+                      class="btn btn-info btn-block addCourse"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+
+                    {{/if}}
+
+                  </div>
+                </div>
+              </div>
+              {{/each}}
+            </div>
+          </div>
+          {{/grouped_each}}
+
+        </div>
+        <!-- Carousel controls -->
+        <!-- Carousel controls -->
+        <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+          <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Top 10 khóa học nổi bật-->
+
+<!--Jump button-->
+
+<div class="card card-image" style="background-color: #126d57; font-family: Rubik;">
+  <div class="text-white text-center rgba-stylish-strong py-5 px-4">
+    <!-- Content -->
+    <img src="../img/logo-01.png" class="rounded mx-auto d-block img-logo" alt="logo">
+    <h2 class="card-title h2 my-4 py-2">It’s time to start investing in yourself</h2>
+    <p class="mb-4 pb-2 px-md-5 mx-md-5">Introduce about web bla bla bla bla bla</p>
+    <a href="/register" class="btn btn-outline-info btn-rounded waves-effect">Register now</a>
+  </div>
+</div>
+<!--End jumpbutton-->
+<!-- Danh sach top 10 khoa hoc mới nhất-->
+<div class="container-xl mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="d-flex justify-content-center"><b>Popular Courses</b></h2>
+      <div id="myCarousel1" class="carousel slide" data-ride="carousel" data-interval="0">
+        <!-- Wrapper for carousel items -->
+        <div class="carousel-inner">
+          {{#grouped_each 4 newCourses}}
+          <div class="item carousel-item new-carousel">
+            <div class="row">
+              {{#each this }}
+
+              <div class="col-sm-3">
+                <div class="thumb-wrapper">
+                  <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                  <div class="img-box">
+                    <a href="/detail-course/{{IdKhoaHoc}}"><img src="../img/onlCourse.jpg" class="img-fluid"
+                        alt="course-{{IdKhoaHoc}}"></a>
+                  </div>
+                  <div class="thumb-content">
+                    <h4 class="text-truncate"><b>{{TenKhoaHoc}}</b></h4>
+                    <h6 class="text-muted">{{TenGiangVien}}</h6>
+                    <span class="badge badge-success ml-3"><i class="far fa-clock pr-1"></i>NEW</span>
+                    <div class="star-rating">
+                      <ul class="list-inline">
+                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                        <span>({{SoLuongHVDanhGia}})</span>
+                      </ul>
+                    </div>
+                    <p class="item-price"><span
+                        class="text-danger"><strike>${{HocPhi}}</strike></span><b>${{giaMoi}}</b></p>
+                    <p class="font-weight-bold">{{TenLinhVuc}}</p>
+                    <a data-id="{{IdKhoaHoc}}" href="javascript:;" role="button" class="btn btn-info addCourse"><i
+                        class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                    <a data-id="{{IdKhoaHoc}}" href="javascript:;" role="button" class="btn btn-danger addWishList"><i
+                        class="fa fa-heart" aria-hidden="true"></i></a>
+                  </div>
+                </div>
+              </div>
+
+
+              {{/each}}
+            </div>
+          </div>
+          {{/grouped_each}}
+
+        </div>
+        <!-- Carousel controls -->
+        <!-- Carousel controls -->
+        <a class="carousel-control-prev" href="#myCarousel1" data-slide="prev">
+          <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel1" data-slide="next">
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Top 10 khóa học mới nhất-->
+
+
+<!--Become teacher-->
+<section class="become-teacher">
+  <div class="teacher-block">
+    <div>
+      <h2>
+        Đăng kí ngay để trở thành giảng viên của chúng tôi
+      </h2>
+      <div class="teacher">
+        <div class="inner-teacher">
+          <img src="../img/teacher-icon3-01.png">
+          <p>Giảng viên</p>
+        </div>
+      </div>
+      <div class="teacher">
+        <div class="inner-teacher">
+          <img src="../img/teacher-icon1-01.png">
+          <p>Chuyên gia</p>
+        </div>
+      </div>
+      <div class="teacher">
+        <div class="inner-teacher">
+          <img src="../img/teacher-icon2-01.png">
+          <p>Doanh nhân</p>
+        </div>
+      </div>
+      <div class="teacher">
+        <div class="inner-teacher">
+          <img src="../img/teacher-icon4-01.png">
+          <p>Doanh nghiệp</p>
+        </div>
+      </div>
+
+    </div>
+    <span>
+      “Có trên 3 năm kinh nghiệm trong lĩnh vực muốn giảng dạy
+      <br>
+      Kỹ năng trình bày lưu loát, dễ hiểu, ngôn ngữ cơ thể tốt.”
+    </span>
+
+  </div>
+  <div>
+    <button class="btn btn-outline-warning">Đăng kí</button>
+  </div>
+</section>
+<!--Top topic-->
+<div class="container mt-3 mb-5">
+  {{#if numTopTopic}}
+  <h2 class="d-flex justify-content-center"> <b>Không có lĩnh vực nào nổi bật trong tuần qua </b></h2>
+  {{else}}
+  <h2 class="d-flex justify-content-center"> <b>Hot topics </b></h2>
+  {{/if}}
+
+  <div class="row">
+    {{#each topTopic}}
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+      <div class="my-list bg-white text-center">
+        <img src="../img/onlCourse.jpg" alt="dsadas" />
+        <div class="font-weight-bold">{{TenLinhVuc}}</div>
+        <div><i class="fa fa-book" aria-hidden="true"></i> {{SoKhoaHoc}}Courses</li>
+        </div>
+        <div class="detail">
+          <img src="../img/onlCourse.jpg" alt="dsadas" />
+          <a href="/courses/{{idLinhVucCap2}}" class="btn btn-info mt-1">View all courses</a>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+<script>
+  var elems = document.getElementsByClassName('viewer-carousel');
+  if (elems.length) {
+    // add 'active' classs to the first element in the array
+    elems[0].classList.add('active');
+  }
+</script>
+<script>
+  var elem = document.getElementsByClassName('new-carousel');
+  if (elem.length) {
+    // add 'active' classs to the first element in the array
+    elem[0].classList.add('active');
+  }
+</script>
+
+<!--End main body-->

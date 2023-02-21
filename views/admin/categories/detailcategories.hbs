@@ -1,0 +1,86 @@
+{{#section 'header'}}
+<link rel=" stylesheet" href="/css/styles.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{{/section}}
+{{#section 'footer'}}
+
+<script>
+    $("#option").on("change", function () {
+        var opt = $(this).val();
+        if (opt == '0') { $('tr').show(); return }
+        $("tr").each(function () {
+            var tr = $(this);
+            tr.show();
+            if (!tr.hasClass(opt)) {
+                tr.hide();
+            }
+            if (opt == "zero") {
+                tr.show();
+            }
+        });
+    });
+</script>
+
+
+{{/section}}
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">CATEGORIES</div>
+
+                    <a class="nav-link" href="/admin/allcategories">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        All categories
+                    </a>
+                    <a class="nav-link" href="/admin/addcategories">
+                        <div class="sb-nav-link-icon"><i class="fas fa-plus-square"></i></div>
+                        Add categories
+                    </a>
+                    <div class="sb-sidenav-menu-heading">COURSES</div>
+                    <a class="nav-link" href="/admin/allcourses">
+                        <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                        All courses
+                    </a>
+                    <div class="sb-sidenav-menu-heading">USER MANAGEMENT</div>
+                    <a class="nav-link" href="/admin/allusers">
+                        <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                        All users
+                    </a>
+                    <a class="nav-link" href="/admin/add-teacher">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
+                        Add teacher
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h2 class="mt-4">Quản lý lĩnh vực</h2>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table mr-1"></i>
+                        <select class="mr-2 form-control mb-2" id="option" name="category">
+                            <option value="0">Tất cả lĩnh vực</option>
+                            {{#each lcCategories}}
+                            <option value="{{idLinhVuc}}">{{TenLinhVuc}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+</div>

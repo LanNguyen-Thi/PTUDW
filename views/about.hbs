@@ -1,0 +1,329 @@
+{{#section 'header'}}
+<link rel=" stylesheet" href="/css/styles.css" />
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{{/section}}
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">COURSES</div>
+                    <a class="nav-link" href="/teacher/allmycourses">
+                        <div class="sb-nav-link-icon"><i class="fas fa-folder-open"></i></div>
+                        All my courses
+                    </a>
+                    <a class="nav-link" href="/teacher/addnewcourse">
+                        <div class="sb-nav-link-icon"><i class="fas fa-folder-plus"></i></div>
+                        Add new course
+                    </a>
+                    {{!-- <a class="nav-link" href="/teacher/editcourse">
+                        <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
+                        Edit course
+                    </a> --}}
+                    
+                    <div class="sb-sidenav-menu-heading">MY PROFILE</div>
+                    <a class="nav-link" href="/teacher/profile">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                        My profile
+                    </a>
+                    <a class="nav-link" href="/teacher/editprofile">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
+                        Edit my profile
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h2 class="mt-4">Your profile</h2>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table mr-1"></i>
+                        My profile
+                    </div>
+                    <div class="card-body">
+                        <div class="single-pro-review-area mt-t-30 mg-b-15">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form>
+                                            <div class="form-group row">
+                                                <label for="firstname" class="col-2 col-form-label">First name</label>
+                                                <div class="col-10">
+                                                    <input id="firstname" name="firstname" placeholder="First name"
+                                                        class="form-control here" required="required" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="lastname" class="col-2 col-form-label">Last Name</label>
+                                                <div class="col-10">
+                                                    <input id="lastname" name="lastname" placeholder="Last Name"
+                                                        class="form-control here" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="bigtitle" class="col-2 col-form-label">Big Title</label>
+                                                <div class="col-10">
+                                                    <input id="bigtitle" name="bigtitle"
+                                                        placeholder="Example: Teacher at University of Science"
+                                                        class="form-control here" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="biography" class="col-2 col-form-label">Biography</label>
+                                                <div class="col-10">
+                                                    <textarea id="publicinfo" name="publicinfo" cols="40" rows="4"
+                                                        class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="select" class="col-2 col-form-label">Languages
+                                                </label>
+                                                <div class="col-10">
+                                                    <select id="languageSelect" name="languageSelect"
+                                                        class="custom-select">
+                                                        <option value="default">Vietnamese</option>
+                                                        <option value="id_ID">Bahasa Indonesia</option>
+                                                        <option value="de_DE">Deutsch</option>
+                                                        <option value="en_US">English (US)</option>
+                                                        <option value="es_ES">Español (España)</option>
+                                                        <option value="fr_FR">Français (France)</option>
+                                                        <option value="it_IT">Italiano</option>
+                                                        <option value="nl_NL">Nederlands</option>
+                                                        <option value="pl_PL">Polski</option>
+                                                        <option value="pt_BR">Português (Brasil)</option>
+                                                        <option value="ro_RO">Română</option>
+                                                        <option value="tr_TR">Türkçe</option>
+                                                        <option value="ru_RU">Русский</option>
+                                                        <option value="th_TH">ภาษาไทย</option>
+                                                        <option value="zh_TW">中文 (繁體)</option>
+                                                        <option value="zh_CN">中文(简体)</option>
+                                                        <option value="ja_JP">日本語</option>
+                                                        <option value="ko_KR">한국어</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="website" class="col-2 col-form-label">Website</label>
+                                                <div class="col-10">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon3"
+                                                                placeholder="username">https://example.com/</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="basic-url"
+                                                            aria-describedby="basic-addon3">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="website" class="col-2 col-form-label">Facebook</label>
+                                                <div class="col-10">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon3"
+                                                                placeholder="username">https://www.facebook.com/</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="basic-url"
+                                                            aria-describedby="basic-addon3">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="website" class="col-2 col-form-label">LinkedIn</label>
+                                                <div class="col-10">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon3"
+                                                                placeholder="username">https://www.linkedin.com/</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="basic-url"
+                                                            aria-describedby="basic-addon3">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="website" class="col-2 col-form-label">Youtube</label>
+                                                <div class="col-10">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon3"
+                                                                placeholder="username">https://www.youtube.com/</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="basic-url"
+                                                            aria-describedby="basic-addon3">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="offset-4 col-10">
+                                                    <button name="submit" type="submit" class="btn btn-primary">Update
+                                                        My
+                                                        Profile</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </main>
+    </div>
+</div>
+{{#section 'footer'}}
+<script>
+    (function ($) {
+        "use strict";
+
+        // Add active state to sidbar nav links
+        var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function () {
+            if (this.href === path) {
+                $(this).addClass("active");
+            }
+        });
+
+        // Toggle the side navigation
+        $("#sidebarToggle").on("click", function (e) {
+            e.preventDefault();
+            $("body").toggleClass("sb-sidenav-toggled");
+        });
+    })(jQuery);
+
+</script>
+{{/section}}
+
+
+{{!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="review-content-section">
+        <div id="dropzone1" class="pro-ad">
+            <form action="/upload" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <input name="firstname" type="text" class="form-control" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <input name="address" type="text" class="form-control" placeholder="Address">
+                        </div>
+                        <div class="form-group">
+                            <input name="mobileno" type="number" class="form-control" placeholder="Mobile no.">
+                        </div>
+                        <div class="form-group">
+                            <input name="finish" id="finish" type="text" class="form-control"
+                                placeholder="Date of Birth">
+                        </div>
+                        <div class="form-group">
+                            <input name="postcode" id="postcode" type="text" class="form-control"
+                                placeholder="Postcode">
+                        </div>
+                        <div class="form-group alert-up-pd">
+                            <div class="dz-message needsclick download-custom">
+                                <i class="fa fa-download edudropnone" aria-hidden="true"></i>
+                                <h2 class="edudropnone">Drop
+                                    image here or click to
+                                    upload.</h2>
+                                <p class="edudropnone"><span class="note needsclick">(This
+                                        is just a demo dropzone.
+                                        Selected image is
+                                        <strong>not</strong>
+                                        actually
+                                        uploaded.)</span>
+                                </p>
+                                <input name="imageico" class="hd-pro-img" type="text" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <input name="department" type="text" class="form-control" placeholder="Department">
+                        </div>
+                        <div class="form-group res-mg-t-15">
+                            <textarea name="description" placeholder="Description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <select name="gender" class="form-control">
+                                <option value="none" selected="" disabled="">Select
+                                    Gender
+                                </option>
+                                <option value="0">Male</option>
+                                <option value="1">Female
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="country" class="form-control">
+                                <option value="none" selected="" disabled="">Select
+                                    country
+                                </option>
+                                <option value="0">India</option>
+                                <option value="1">Pakistan
+                                </option>
+                                <option value="2">Amerika
+                                </option>
+                                <option value="3">China</option>
+                                <option value="4">Dubai</option>
+                                <option value="5">Nepal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="state" class="form-control">
+                                <option value="none" selected="" disabled="">Select
+                                    state
+                                </option>
+                                <option value="0">Gujarat
+                                </option>
+                                <option value="1">Maharastra
+                                </option>
+                                <option value="2">Rajastan
+                                </option>
+                                <option value="3">Maharastra
+                                </option>
+                                <option value="4">Rajastan
+                                </option>
+                                <option value="5">Gujarat
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="city" class="form-control">
+                                <option value="none" selected="" disabled="">Select
+                                    city
+                                </option>
+                                <option value="0">Surat</option>
+                                <option value="1">Baroda
+                                </option>
+                                <option value="2">Navsari
+                                </option>
+                                <option value="3">Baroda
+                                </option>
+                                <option value="4">Surat</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input name="website" type="text" class="form-control" placeholder="Website URL">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="payment-adress">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> --}}

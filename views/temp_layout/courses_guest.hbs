@@ -1,0 +1,145 @@
+{{#section 'footer'}}
+<script>
+    $('.addCourse').on('click', function () {
+        const id = $(this).data('id');
+        $('#IdKhoaHoc').val(id);
+        $('#frmAddCourse').submit();
+    });
+</script>
+
+<script>
+    $('.addWishList').on('click', function () {
+        const id = $(this).data('id');
+        $('#IdKhoaHoc-WishList').val(id);
+        $('#frmAddWishList').submit();
+    });
+</script>
+{{/section}}
+<!--Form add wishList-->
+<form action="/user/my-watchlist/add" method="post" id="frmAddWishList">
+    <input type="hidden" name="IdKhoaHoc" id="IdKhoaHoc-WishList">
+    <input type="hidden" name="idHocVien" id="idHocVien-WishList" value="{{stuAccount.idHocVien}}">
+</form>
+<!--Add add wishList .//-->
+<section class="section-content padding-y">
+    <div class="container">
+
+        <div class="row mt-5">
+            <!--Filter bar-->
+            <div class="col-md-3">
+                <!-- filter-topic -->
+                {{#each lcCategories}}
+                <article class="filter-group">
+                    <header class="card-header">
+                        <a href="#" data-toggle="collapse" data-target="#collapse_{{idLinhVuc}}" aria-expanded="true">
+                            <i class="icon-control fa fa-chevron-down"></i>
+                            <h6 class="title">{{TenLinhVuc}}<b
+                                    class="badge badge-pill badge-light float-right">{{soLV}}</b></h6>
+                        </a>
+                    </header>
+                    <div class="filter-content collapse show" id="collapse_{{idLinhVuc}}">
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                {{#each level2}}
+                                <li class="mt-1"><a href="/courses/{{idLinhVucCap2}}">{{TenLinhVucCap2}}</a> <b
+                                        class="badge badge-pill badge-light float-right">{{lookup ../nCourses
+                                        @index}}</b> </li>
+
+                                {{/each}}
+                            </ul>
+                        </div> <!-- End card-body.// -->
+                    </div>
+                </article>
+                {{/each}}
+
+
+                <!-- filter-topic .// -->
+
+            </div>
+            <!--Filter bar .//-->
+
+            <!--Course list with pagination-->
+            <main class="col-md-9">
+
+                <div class="row">
+
+                    <div class="container mt-5 mb-5 mt-2">
+                        <div class="d-flex justify-content-center row">
+                            <div class="col-md-10">
+                                <form action="/cart/add" method="post" id="frmAddCourse">
+                                    <input type="hidden" name="IdKhoaHoc" id="IdKhoaHoc">
+                                </form>
+                                <!--Course-->
+                                {{#if this.empty}}
+                                <h1 class="d-flex justify-content-center">Không có khóa học trong chủ đề
+                                    {{TenLinhVucCap2}}</h1>
+                                {{/if}}
+                                {{#each this.mycourses}}
+                                <div class="row p-2 bg-white border rounded mt-2">
+                                    <div class="col-md-3 mt-1"><img
+                                            class="img-fluid img-responsive rounded product-image"
+                                            src="../img/onlCourse.jpg"></div>
+                                    <div class="col-md-6 mt-1" type="button"
+                                        onclick="window.location.href='/detail-course/{{IdKhoaHoc}}'">
+                                        <h5>{{TenKhoaHoc}}</h5>
+                                        <div class="d-flex flex-row">
+                                            <div class="ratings mr-2"><i class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i></div><span>({{SoLuongHVDanhGia}})</span>
+                                            <h6 class="text-success">
+                                                {{#if isBestSeller}}
+                                                <span class="badge badge-danger ml-3"><i
+                                                        class="far fa-clock pr-1"></i>Bestseller</span>
+                                            </h6>
+                                            {{/if}}
+                                            {{#if isNew}}
+                                            <span class="badge badge-success ml-3"><i
+                                                    class="far fa-clock pr-1"></i>New</span></h6>
+                                            {{/if}}
+                                        </div>
+                                        <div><b>{{TenGiangVien}}</b></div>
+                                        <div class="mt-1 mb-1 spec-1 text-truncate"><span
+                                                class="dot"></span><span>{{MoTaNgan}}</span></div>
+                                    </div>
+                                    <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                                        <h5 class="mr-1">${{format HocPhi}}</h5>
+                                        {{#if KhuyenMai}}
+                                        <span class="strike-text">${{format giaMoi}}</span>
+                                        {{/if}}
+                                        <div class="d-flex flex-column mt-4">
+                                            {{#if ../accounttype}}
+                                            <a data-id="{{IdKhoaHoc}}" href="javascript:;" role="button"
+                                                class="btn btn-outline-danger addWishList"><i class="fa fa-heart"
+                                                    aria-hidden="true"></i></a>
+                                            {{/if}}
+                                            <a class="btn btn-default btn-sm mt-2 addCourse" data-id="{{IdKhoaHoc}}"
+                                                href="javascript:;" role="button"><i class="fa fa-shopping-cart"
+                                                    aria-hidden="true"></i>Add to cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                                <!--End Course .//-->
+
+                            </div>
+                            <!--End course list .//-->
+                            <!--Pagination-->
+                            <nav class="mt-4" aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </nav>
+                            <!--End pagination-->
+                        </div>
+                    </div>
+            </main>
+            <!--End Course list with pagination .//-->
+
+        </div>
+
+    </div> <!-- container .//  -->
+</section>

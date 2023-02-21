@@ -1,0 +1,160 @@
+
+{{#section 'header'}}
+<link rel=" stylesheet" href="/css/styles.css" />
+{{/section}}
+
+{{#section 'footer'}}
+ <script>
+        $('#fuMain').fileinput({
+            theme: 'fa',
+            dropZoneEnabled: true,
+            allowedFileExtensions: ['png', 'jpg', 'gif'],
+        });
+        </script>
+
+
+{{/section}}
+    {{#with detCourse}}
+<form action="/teacher/editCourse/{{IdKhoaHoc}}" method="post">
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">COURSES</div>
+                    <a class="nav-link" href="/teacher/allmycourses">
+                        <div class="sb-nav-link-icon"><i class="fas fa-folder-open"></i></div>
+                        All my courses
+                    </a>
+                    <a class="nav-link" href="/teacher/addnewcourse">
+                        <div class="sb-nav-link-icon"><i class="fas fa-folder-plus"></i></div>
+                        Add new course
+                    </a>
+                    {{!-- <a class="nav-link" href="/teacher/editcourse">
+                        <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
+                        Edit course
+                    </a> --}}
+                    <div class="sb-sidenav-menu-heading">MY PROFILE</div>
+                    <a class="nav-link" href="/teacher/profile">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                        My profile
+                    </a>
+                    <a class="nav-link" href="/teacher/editprofile">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
+                        Edit my profile
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+        
+    
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h2 class="mt-4">My courses</h2>
+
+                <div class="card mb-4">
+                    
+                    <div class="card-header">
+                        <a href="/teacher/addLesson/{{IdKhoaHoc}}" class="btn btn-info"><i class="fas fa-plus mr-1"></i>Bổ sung bài học</a>
+                        <button class="btn btn-danger"><i class="fas fa-edit mr-1"></i>Chỉnh sửa bài học</button>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="POST">
+                            <div class="form-group">
+                                <h6>Chọn lĩnh vực khóa học</h6>
+                            <select class="mr-2 form-control mb-2" id="option" name="category">
+                                 {{#each ../lcCategories}}
+                                    {{#each level2}}
+                                    <option value="{{idLinhVucCap2}}" >{{TenLinhVucCap2}}</option>
+                                    {{/each}}
+                                    {{/each}}
+                               
+                            
+                            </select>
+                            
+                                <div class="course">
+                                    <div>Course title</div>
+                                    <input type="text" name="title" placeholder="Enter your course title." value="{{TenKhoaHoc}}">
+                                </div>
+                                <div class="course">
+                                    <div>Course subtitle</div>
+                                    <input type="text" name="subtitle" placeholder="Enter the subtitle of your course." value="{{MoTaNgan}}">
+                                </div>
+                                <div class="course">
+                                    <div>Description of the course</div>
+                                    <textarea class="form-control" type="text" id="descriptioncourse" name="description" 
+                                        autofocus>{{MoTaChiTiet}}</textarea>
+                                </div>
+                                
+
+                                <div class="course">
+                                    <div>Price</div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                        </div>
+                                        <input type="text" name="price" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)" value="{{HocPhi}}">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="course">
+                                    <div>Promotion</div>
+                                    <input type="text" name="promotion"
+                                        placeholder="Enter your course promotion (if available)." value="{{KhuyenMai}}">
+                                </div>
+            <!--Danh sach chuong -->
+                                             <!-- Begin Page Content -->
+                
+                <!-- /.container-fluid -->
+            <!-- Danh sách chương -->
+                            
+                                <div class="course">
+                                    <div>Course images</div>
+
+                                    <p style="font-style:italic">Upload your course image here. To be accepted,
+                                        it must
+                                        meet our quality standards
+                                        for course images.
+                                        Important guidelines: 750x422 pixels; format .jpg, .jpeg ,.gif, or .png;
+                                        no text
+                                        on
+                                        the image.</p>
+                                    
+                                </div>
+                                <div class="card-body">
+                                        <input  name="fuMain" type="file" class="file">
+                                    </div>
+                                <div class="course">
+                                    <a class="col-md-2"> Status </a>
+                                    <a class="col-md-10">
+                                        <input type="checkbox" class="form-check-input" name="finished" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1"> Completed</label>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            Save
+                        </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    {{/with}}
+</div>
+
+</form>

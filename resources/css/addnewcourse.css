@@ -1,0 +1,61 @@
+#container {
+    width: 60%;
+    margin: 0 auto;
+  }
+  
+  #left {
+    float: left;
+  }
+  
+  #right {
+    float: right;
+  }
+  
+    #right ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin-top: 30px;
+    }
+  
+    #right li {
+      display: inline-block;
+      min-width: 110px;
+      font-weight: bold;
+      border-bottom: 1px solid #000;
+      margin-left: 20px;
+    }
+  
+      #right li:hover {
+        color: #ed6a43;
+        border-bottom-color: #ed6a43;
+        cursor: pointer;
+      }
+ 
+  .course {
+    margin-top: 10px;
+  }
+  
+  .course input, .course select, .course textarea {
+    width: 100%;
+  }
+  
+  .course div:nth-child(2) {
+    float: right;
+    color: #ed6a43;
+    font-weight: bold;
+  }
+  
+  .course button {
+    border: none;
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0;
+  }
+  
+    .course button:hover {
+      cursor: pointer;
+    }

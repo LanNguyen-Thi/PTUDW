@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="../css/studentProfile.css">
+    <!--Link bootstrap-->
+    <link rel="stylesheet" href="../bootstrap-4.5.3-dist/css/bootstrap.css">
+    <script src="../bootstrap-4.5.3-dist/js/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="main-body">
+        
+              <!-- Breadcrumb -->
+              <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                </ol>
+              </nav>
+              <!-- /Breadcrumb -->
+        
+              <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex flex-column align-items-center text-center">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                        <div class="mt-3">
+                          <h4>Nguyen Nguyen</h4>
+                          <p class="text-secondary mb-1">20 years old</p>
+                          <p class="text-muted font-size-sm">Thu Duc, HCM city, Viet Nam</p>
+                          <button class="btn btn-primary">Edit profile</button>
+                          <button class="btn btn-outline-primary">Change avatar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card mt-3">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="" role="tab" aria-controls="home">Edit profile</a>
+                        <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="" role="tab" aria-controls="home">My courses</a>
+                        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="" role="tab" aria-controls="profile">My watchlist</a>
+                        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="" role="tab" aria-controls="profile">Log out</a>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                 
+                  <div class="card">
+
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Edit profile</h3>
+                    <div class="card-body">
+                      <div id="table" class="table-editable">
+
+                        <table class="table table-bordered table-responsive-md table-striped text-center">
+                          <form>
+                            <thead>
+                              <tr>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Type</th>
+                                <th class="text-center">Value</th>
+                                <th class="text-center">Remove</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="pt-3-half" contenteditable="true">1</td>
+                                <td class="pt-3-half" contenteditable="true">Email</td>
+                                <td class="pt-3-half" contenteditable="true">
+                                  <input type="email" class="form-control" id="editInputEmail1" aria-describedby="emailHelp" placeholder="nguyennguyen1112000@gmail.co">
+                                </td>
+                                <td>
+                                  <span class="table-remove"><button type="button"
+                                      class="btn btn-success btn-rounded btn-sm btn-block my-0">Save</button></span>
+                                </td>
+                              </tr>
+                              <!-- This is our clonable table line -->
+                              <tr>
+                                <td class="pt-3-half" contenteditable="true">2</td>
+                                <td class="pt-3-half" contenteditable="true">Full name</td>
+                                <td class="pt-3-half" contenteditable="true">
+                                  <input type="text" class="form-control" id="fullname" placeholder="Nguyen Binh Nguyen">
+                                </td>
+                                <td>
+                                  <span class="table-remove"><button type="button"
+                                      class="btn btn-success btn-rounded btn-sm btn-block my-0">Save</button></span>
+                                </td>
+                              </tr>
+                              <!-- This is our clonable table line -->
+                              <tr>
+                                <td class="pt-3-half" contenteditable="true">3</td>
+                                <td class="pt-3-half" contenteditable="true">Password</td>
+                                <td class="pt-3-half" contenteditable="true">
+                                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="New password">
+                                </td>
+                                <td>
+                                  <span class="table-remove"><button type="button"
+                                      class="btn btn-success btn-rounded btn-sm btn-block my-0">Save</button></span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </form>
+                         
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <!--End Edit profile-->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+        </div>
+        
+        <script src="../bootstrap-4.5.3-dist/js/bootstrap.js"></script> 
+        <script src="../js/search.js"></script> 
+</body>
+</html>

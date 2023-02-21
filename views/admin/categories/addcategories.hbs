@@ -1,0 +1,134 @@
+{{#section 'header'}}
+<link rel=" stylesheet" href="/css/styles.css" />
+{{/section}}
+{{#section 'footer'}}
+<script>
+    $(document).ready(function () {
+        $('#LVCap2').hide()
+        $('#LVCap1').show()
+    });
+    $("#option").change(function () {
+        const value = $(this).val()
+        if (value == 'lv1') {
+            $('#LVCap2').hide()
+            $('#LVCap1').show()
+        }
+        else {
+            $('#LVCap1').hide()
+            $('#LVCap2').show()
+        }
+
+        const num = parseInt($("#inputNumOfChap").val())
+        for (var i = 1; i <= num; i++) {
+            const chap = String.toString(i)
+            const newChap = `
+                            <div class="col-lg-6 mt-2" class="detailChap" >
+
+                                <div class="card position-relative" id="Chapter${i}">
+                                    <div class="card-header py-3 row">
+                                        <div class="m-0 font-weight-bold text-primary">Chương ${i}</div> <a class="btn btn-sm btn-default addLesson" onclick="myFunction(${i})" id ="${i}" ><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                    <input type="text" name="chapter${i}" placeholder="Nhập tên chương">
+                                    </div>
+                                
+                                </div>
+                                
+
+                            </div>`
+            $('.Chapters').append(newChap);
+        }
+    });
+</script>
+{{/section}}
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">CATEGORIES</div>
+
+                    <a class="nav-link" href="/admin/allcategories">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        All categories
+                    </a>
+                    <a class="nav-link" href="/admin/addcategories">
+                        <div class="sb-nav-link-icon"><i class="fas fa-plus-square"></i></div>
+                        Add categories
+                    </a>
+                    <div class="sb-sidenav-menu-heading">COURSES</div>
+                    <a class="nav-link" href="/admin/allcourses">
+                        <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                        All courses
+                    </a>
+                    <div class="sb-sidenav-menu-heading">USER MANAGEMENT</div>
+                    <a class="nav-link" href="/admin/allusers">
+                        <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                        All users
+                    </a>
+                    <a class="nav-link" href="/admin/add-teacher">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
+                        Add teacher
+                    </a>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <h2 class="mt-4">Thêm lĩnh vực</h2>
+                <form action="/admin/addCategory" method="post">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-plus-square mr-1"></i>
+                            Add category
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <h6>Chọn lĩnh vực</h6>
+                                <select class="mr-2 form-control mb-2" id="option" name="category">
+                                    <option value="lv1">Lĩnh vực cấp 1</option>
+                                    <option value="lv2">Lĩnh vực cấp 2</option>
+
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="card-body" id="LVCap1">
+                            <div class="course">
+                                <div>Tên lĩnh vực</div>
+                                <input type="text" name="lv1lv1" placeholder="Nhập tên lĩnh vực">
+                            </div>
+
+
+                        </div>
+                        <div class="card-body" id="LVCap2">
+                            <div class="course">
+                                <h6>Chọn lĩnh vực cấp 1</h6>
+                                <select class="mr-2 form-control mb-2" id="optionLv1" name="lv2lv1">
+                                    {{#each lcCategories}}
+                                    <option value="{{idLinhVuc}}">{{TenLinhVuc}}</option>
+                                    {{/each}}
+
+                                </select>
+                                <div>Tên lĩnh vực</div>
+                                <input type="text" name="lv2lv2" placeholder="Nhập tên lĩnh vực">
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                Add
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </main>
+    </div>
+
+</div>

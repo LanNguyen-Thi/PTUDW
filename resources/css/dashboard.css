@@ -1,0 +1,10 @@
+.menu{
+    border: 1px;
+    color: #B3DEF2;
+    width: fit-content;
+    display: flex;
+    align-items: flex-start;
+}
+.menu-table{
+    
+}

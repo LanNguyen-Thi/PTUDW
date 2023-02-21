@@ -1,0 +1,142 @@
+{{#section 'header'}}
+<link rel=" stylesheet" href="/css/styles.css" />
+{{/section}}
+
+{{#section 'footer'}}
+<script>
+ $('.saveEdit').on('click', function () {
+     if ($("#InputLV").val()==="")
+     {
+         $("#InputLV").val($("#LVold").val());
+     }
+    $('#frmSaveEdit').submit();
+  });
+    $('#fuMain').fileinput({
+        theme: 'fa',
+        dropZoneEnabled: true,
+        allowedFileExtensions: ['png', 'jpg', 'gif'],
+    });
+</script>
+<script>
+    $('.cancel').on('click', function () {        
+         $("#InputLV").val($("#LVold").val());     
+    $('#frmCancel').submit();
+  });
+</script>
+{{/section}}
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">CATEGORIES</div>
+
+                    <a class="nav-link" href="/admin/allcategories">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        All categories
+                    </a>
+                    <a class="nav-link" href="/admin/addcategories">
+                        <div class="sb-nav-link-icon"><i class="fas fa-plus-square"></i></div>
+                        Add categories
+                    </a>
+                    <div class="sb-sidenav-menu-heading">COURSES</div>
+                    <a class="nav-link" href="/admin/allcourses">
+                        <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                        All courses
+                    </a>
+                    <div class="sb-sidenav-menu-heading">USER MANAGEMENT</div>
+                    <a class="nav-link" href="/admin/allusers">
+                        <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                        All users
+                    </a>
+                    <a class="nav-link" href="/admin/add-teacher">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
+                        Add teacher
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h2 class="mt-4">Edit category</h2>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table mr-1"></i>
+                        Lĩnh vực cấp 2
+                    </div>
+                    <div class="card-body">
+                        {{#with Categ2}}
+
+                        <form action="/admin/allcategories/delete" id="frmCancel" method="POST">
+                            <input type="hidden" name="idLinhVuc" value="{{idLinhVucCap2}}">
+                        </form>
+                        <form action="/admin/allcategories/edit" method="POST" id="frmSaveEdit">
+                            <input type="hidden" name="idLinhVucCap2" value="{{idLinhVucCap2}}">
+                            <div class="form-group">
+                                <h6>Chọn lĩnh vực khóa học</h6>
+                                <select class="mr-2 form-control mb-2" id="option" name="category">
+                                    {{#each ../lcCategories}}
+                                    <option value="{{idLinhVuc}}">{{TenLinhVuc}}</option>
+                                    {{/each}}
+
+                                </select>
+                                <div class="course">
+                                    <div>Tên lĩnh vực cũ</div>
+                                    <input value="{{TenLinhVuc}}"type="text" name="title" placeholder="Enter your course title." id="LVold" readonly>
+
+                                </div>
+                                <div class="course">
+                                    <div>Tên lĩnh vực mới</div>
+                                    <input type="text" name="LinhVucCap2" placeholder="Enter your course title." id="InputLV">
+                                </div>
+                                <div class="course">Số khóa học: <span
+                                        class="text-danger font-weight-bold">{{SoKhoaHoc}}</span></div>
+
+
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="card-footer">
+                        <a href="javascript:;" role="button" class="btn btn-primary saveEdit">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            Save
+                        </a>
+                        <a href="javascript:;" role="button" class="course btn btn-danger cancel">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            Cancel
+                        </a>
+                        {{/with}}
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+{{#section 'footer'}}
+<script>
+    (function ($) {
+        "use strict";
+
+        // Add active state to sidbar nav links
+        var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function () {
+            if (this.href === path) {
+                $(this).addClass("active");
+            }
+        });
+
+        // Toggle the side navigation
+        $("#sidebarToggle").on("click", function (e) {
+            e.preventDefault();
+            $("body").toggleClass("sb-sidenav-toggled");
+        });
+    })(jQuery);
+
+</script>
+{{/section}}

@@ -1,0 +1,229 @@
+{{#section 'header'}}
+<link rel=" stylesheet" href="/css/styles.css" />
+{{/section}}
+
+{{#section 'footer'}}
+<script>
+    $('#fuMain').fileinput({
+        theme: 'fa',
+        dropZoneEnabled: true,
+        allowedFileExtensions: ['png', 'jpg', 'gif'],
+    });
+</script>
+<script>
+    $("#inputNumOfChap").change(function () {
+        $('.Chapters').empty()
+        const num = parseInt($("#inputNumOfChap").val())
+        for (var i = 1; i <= num; i++) {
+            const chap = String.toString(i)
+            const newChap = `
+                        <div class="col-lg-6 mt-2" class="detailChap" >
+                            <div class="card position-relative" id="Chapter${i}">
+                                <div class="card-header py-3 row">
+                                    <div class="m-0 font-weight-bold text-primary">Chương ${i}</div> <a class="btn btn-sm btn-default addLesson" onclick="myFunction(${i})" id ="${i}" ><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                <input type="text" name="chapter${i}" placeholder="Nhập tên chương">
+                                </div>
+                               
+                            </div>
+                            
+                        </div>`
+            $('.Chapters').append(newChap);
+        }
+    });
+</script>
+<script>
+    function myFunction(i) {
+        const id = '#Chapter' + i
+        const ls = '.Lesson' + i
+        $(id).append(` <div class="card-body Lesson${i}">
+                                    <div>
+                                    <nav class="navbar navbar-expand navbar-light bg-light mb-4">
+                                         <input type="text" name="Chapter${i}"
+                                        placeholder="Tên bài học">
+                                        <ul class="navbar-nav ml-auto">
+                                            <li class="nav-item dropdown">
+                                            
+                                                <div>
+                                                    <input type="file" class="form-control" name="video${i}" id="video-${$(ls).length}" />
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    </div>
+                                </div>`)
+        return;
+    }
+</script>
+{{/section}}
+<form action="/teacher/addCourse" method="post">
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">COURSES</div>
+                        <a class="nav-link" href="/teacher/allmycourses">
+                            <div class="sb-nav-link-icon"><i class="fas fa-folder-open"></i></div>
+                            All my courses
+                        </a>
+                        <a class="nav-link" href="/teacher/addnewcourse">
+                            <div class="sb-nav-link-icon"><i class="fas fa-folder-plus"></i></div>
+                            Add new course
+                        </a>
+                        {{!-- <a class="nav-link" href="/teacher/editcourse">
+                            <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
+                            Edit course
+                        </a> --}}
+                        <div class="sb-sidenav-menu-heading">MY PROFILE</div>
+                        <a class="nav-link" href="/teacher/profile">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            My profile
+                        </a>
+                        <a class="nav-link" href="/teacher/editprofile">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
+                            Edit my profile
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid">
+                    <h2 class="mt-4">My courses</h2>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table mr-1"></i>
+                            Add new course
+                        </div>
+                        <div class="card-body">
+                            <form action="" method="POST">
+                                <div class="form-group">
+                                    <h6>Chọn lĩnh vực khóa học</h6>
+                                    <select class="mr-2 form-control mb-2" id="option" name="category">
+                                        {{#each categ2}}
+                                        <option value="{{idLinhVucCap2}}">{{TenLinhVuc}}</option>
+                                        {{/each}}
+
+                                    </select>
+
+                                    <div class="course">
+                                        <div>Course title</div>
+                                        <input type="text" name="title" placeholder="Enter your course title." required>
+                                    </div>
+                                    <div class="course">
+                                        <div>Course subtitle</div>
+                                        <input type="text" name="subtitle"
+                                            placeholder="Enter the subtitle of your course." required>
+                                    </div>
+                                    <div class="course">
+                                        <div>Description of the course</div>
+                                        <textarea class="form-control" type="text" id="descriptioncourse"
+                                            name="description" required autofocus></textarea>
+                                    </div>
+
+
+                                    <div class="course">
+                                        <div>Price</div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">$</span>
+                                            </div>
+                                            <input type="text" name="price" class="form-control"
+                                                aria-label="Amount (to the nearest dollar)" required>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="course">
+                                        <div>Promotion</div>
+                                        <input type="text" name="promotion"
+                                            placeholder="Enter your course promotion (if available).">
+                                    </div>
+                                    <!--Danh sach chuong -->
+                                    <!-- Begin Page Content -->
+                                    <div class="container-fluid">
+
+                                        <!-- Page Heading -->
+                                        <h3 class="h3  text-gray-800 text-danger">Danh sách các chương</h3>
+                                        <div>
+                                            <p class="mb-3">Chọn số chương </p>
+                                            <div class="course">
+                                                <input id="inputNumOfChap" type="number" name="Sochuong"
+                                                    placeholder="Nhập số chương" min="1" required>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2 Chapters">
+
+                                        </div>
+
+                                    </div>
+                                    <!-- /.container-fluid -->
+                                    <!-- Danh sách chương -->
+
+                                    <div class="course">
+                                        <div>Course images</div>
+
+                                        <p style="font-style:italic">Upload your course image here. To be accepted,
+                                            it must
+                                            meet our quality standards
+                                            for course images.
+                                            Important guidelines: 750x422 pixels; format .jpg, .jpeg ,.gif, or .png;
+                                            no text
+                                            on
+                                            the image.</p>
+
+                                    </div>
+                                    <div class="card-body">
+                                        <input name="fuMain" type="file" class="file" required>
+                                    </div>
+                                    <div class="course">
+                                        <a class="col-md-2"> Status </a>
+                                        <a class="col-md-10">
+                                            <input type="checkbox" class="form-check-input" name="finished"
+                                                id="exampleCheck1">
+                                            <label class="form-check-label" for="exampleCheck1"> Completed</label>
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                                Save
+                            </button>
+</form>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</form>
+{{#section 'footer'}}
+{{!--
+<script>
+    (function ($) {
+        "use strict";
+        // Add active state to sidbar nav links
+        var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function () {
+            if (this.href === path) {
+                $(this).addClass("active");
+            }
+        });
+        // Toggle the side navigation
+        $("#sidebarToggle").on("click", function (e) {
+            e.preventDefault();
+            $("body").toggleClass("sb-sidenav-toggled");
+        });
+    })(jQuery);
+</script> --}}
+{{/section}}

@@ -1,0 +1,181 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-color">
+    <!-- Brand-->
+    <a class="navbar-brand" href="/">HocNua</a>
+    <div class="collapse navbar-collapse" id="menuNav">
+        <!-- Menu option-->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+
+            <!--Categories-->
+            <!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Categories</a>
+                        <div class="dropdown-menu dropdown-primary">
+                            <a class="dropdown-item" href="#">Category 1</a>
+                            <a class="dropdown-item" href="#">Category 2</a>
+                        </div>
+                    </li> -->
+
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">Categories</a>
+                <ul class="dropdown-menu">
+                    {{#each lcCategories}}
+                    <li class="dropdown-submenu">
+                        <a class="test dropdown-item" tabindex="{{idLinhVuc}}" href="#">{{TenLinhVuc}}<i
+                                class="fa fa-caret-down" aria-hidden="true"></i><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            {{#each level2}}
+                            <li><a tabindex="{{idLinhVuc}}" href="/courses/{{idLinhVucCap2}}"
+                                    class="dropdown-item">{{TenLinhVucCap2}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    {{/each}}
+
+                </ul>
+            </div>
+        </ul>
+    </div>
+    <!--End - Categories-->
+    <!--Search bar -->
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto ml-auto">
+            <li class="nav-item">
+                <div class="justify-content-md-center">
+                    <form class="form-inline my-2 my-lg-0 my-lg-0" action="/search/course">
+                        <input class="form-control mr-sm-2" type="text" name="search-text"
+                            placeholder="Search courses ..." aria-label="Search" style="width: 400px;">
+
+                        <button type="submit" class="search-button">
+                            <i class="fa fa-search"></i> </button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <form action="/login/-out" method="post" id="frmLogout"></form>
+    <!--End of search bar-->
+    {{#if accounttype}}
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a href="/cart" class="btn btn-info btn-sm">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart {{#if nCart}}
+                <span class="badge badge-pill badge-danger">{{nCart}}</span>
+                {{/if}}
+            </a>
+        </li>
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{stuAccount.TenHocVien}}</span>
+
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="/user/profile">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profile
+                </a>
+                <a class="dropdown-item" href="/user/my-courses">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Settings
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+        </li>
+    </ul>
+    {{else}}
+    {{#if Admintype}}
+    <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span>Admin</span>
+
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="/admin/allcategories">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Dashboard
+                </a>
+
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+        </li>
+    </ul>
+    {{else}}
+    {{#if Teachertype}}
+    <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span>Teacher</span>
+
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="/teacher/profile">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Profile
+                </a>
+                <a class="dropdown-item" href="/teacher/allmycourses">
+                    <svg class="svg-inline--fa fa-folder-open fa-w-18" aria-hidden="true" focusable="false"
+                        data-prefix="fas" data-icon="folder-open" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512" data-fa-i2svg="">
+                        <path fill="currentColor"
+                            d="M572.694 292.093L500.27 416.248A63.997 63.997 0 0 1 444.989 448H45.025c-18.523 0-30.064-20.093-20.731-36.093l72.424-124.155A64 64 0 0 1 152 256h399.964c18.523 0 30.064 20.093 20.73 36.093zM152 224h328v-48c0-26.51-21.49-48-48-48H272l-64-64H48C21.49 64 0 85.49 0 112v278.046l69.077-118.418C86.214 242.25 117.989 224 152 224z">
+                        </path>
+                    </svg>
+                    Courses
+                </a>
+
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+        </li>
+    </ul>
+    {{else}}
+    <div class="d-flex justify-content-end">
+        <div class="mr-2">
+            <a href="/cart" class="btn btn-info">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
+                {{#if nCart}}
+                <span class="badge badge-pill badge-danger">{{nCart}}</span>
+                {{/if}}
+
+            </a>
+        </div>
+        <div>
+            <a href="/login" class="btn mr-2 text-white" style="background-color:  #e71d36;">Login</a>
+        </div>
+
+        <div>
+            <a href="/register" class="btn btn-light mr-2">Register</a>
+        </div>
+    </div>
+    {{/if}}
+    {{/if}}
+
+    {{/if}}
+
+
+</nav>

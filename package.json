@@ -1,0 +1,45 @@
+{
+  "name": "PTUDWeb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "engines": {
+    "node": "14.x"
+  },
+  "dependencies": {
+    "average-rating": "^1.2.1",
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.5.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "express-handlebars-sections": "^1.0.1",
+    "express-mysql-session": "^2.1.5",
+    "express-session": "^1.17.1",
+    "handlebars": "^4.7.6",
+    "handlebars.numeral": "^0.2.0",
+    "mariadb": "^2.5.2",
+    "metismenu": "^3.0.6",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.4.17",
+    "two-step-auth": "^1.1.1"
+  },
+  "devDependencies": {
+    "video.js": "^7.10.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LanNguyen-Thi/PTUDWeb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LanNguyen-Thi/PTUDWeb/issues"
+  },
+  "homepage": "https://github.com/LanNguyen-Thi/PTUDWeb#readme"
+}

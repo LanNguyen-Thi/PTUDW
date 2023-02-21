@@ -1,0 +1,133 @@
+{{#section 'header'}}
+<link rel=" stylesheet" href="/css/styles.css" />
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+{{/section}}
+{{#section 'footer'}}
+<script>
+  $('.removeCourse').on('click', function () {
+    const id = $(this).data('id');
+    $('#IdKhoaHoc').val(id);
+    $('#frmRemoverCourse').submit();
+  });
+</script>
+{{/section}}
+<div id="layoutSidenav">
+  <div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+      <div class="sb-sidenav-menu">
+        <div class="nav">
+          <div class="sb-sidenav-menu-heading">COURSES</div>
+          <a class="nav-link" href="/user/my-courses">
+            <div class="sb-nav-link-icon"><i class="fas fa-folder-open"></i></div>
+            All my courses
+          </a>
+          <a class="nav-link" href="/user/my-watchlist">
+            <div class="sb-nav-link-icon"><i class="fas fa-folder-plus"></i></div>
+            My WatchList
+          </a>
+          <div class="sb-sidenav-menu-heading">MY PROFILE</div>
+          <a class="nav-link" href="/user/profile">
+            <div class="sb-nav-link-icon active"><i class="fas fa-user"></i></div>
+            My profile
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid">
+        {{!-- <div class="container"> --}}
+          <div class="main-body">
+            {{!-- <div class="row gutters-sm">
+              <div class="col-md-4 mb-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
+                        width="150">
+                      <div class="mt-3">
+                        {{#with stuAccount}}
+                        {{#if TenHocVien}}
+                        <h4>{{TenHocVien}}</h4>
+                        {{else}}
+                        <h4>(NO NAME)</h4>
+                        {{/if}}
+
+                        {{#if NgaySinh}}
+                        <p class="text-secondary mb-1">{{Tuoi}} years old</p>
+                        {{else}}
+                        <p class="text-secondary mb-1">(NO BIRTHDAY)</p>
+                        {{/if}}
+                        <form action="/user/my-watchlist/remove" method="post" id="frmRemoverCourse">
+                          <input type="hidden" name="IdKhoaHoc" id="IdKhoaHoc">
+                          <input type="hidden" name="idHocVien" id="idHocVien" value="{{idHocVien}}">
+                        </form>
+                        {{/with}}
+                        <a class="btn btn-primary" href="/user/profile">Edit profile</a>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="card mt-3">
+                  <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action" href="/user/profile">Profile</a>
+                    <a class="list-group-item list-group-item-action" href="/user/my-courses">My courses</a>
+                    <a class="list-group-item list-group-item-action active" href="">My watchlist</a>
+                    <a class="list-group-item list-group-item-action">Log out</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8"> --}}
+                <h3 class="card-header text-center font-weight-bold text-uppercase">My Watchlist ({{nCourses}})
+                </h3>
+                <!--Watchlist-->
+                <div class="container pb-5 mb-2">
+                  <!--Card-->
+                  {{#if nItem}}
+
+                  {{else}}
+                  <h3 class="text-danger font-weight-bold text-center">Không có khóa học nào trong danh sách</h3>
+                  {{/if}}
+
+                  {{#each wishList}}
+
+                  <div class="cart-item d-md-flex justify-content-between"><a data-id="{{IdKhoaHoc}}"
+                      href="javascript:;" role="button" class="remove-item removeCourse"><i class="fa fa-times"></i></a>
+                    <div class="px-3 my-3">
+                      <a class="cart-item-product" href="/detail-course/{{IdKhoaHoc}}">
+                        <div class="cart-item-product-thumb"><img src="/img/course-img.png" alt="Product"></div>
+                        <div class="cart-item-product-info">
+                          <h4 class="cart-item-product-title">{{TenKhoaHoc}}</h4><span><strong>Last update:</strong>
+                            {{LastUpdate}}</span><span><strong>Rating</strong> {{DiemDanhGia}}<i class="fa fa-star"
+                              style="color: #e6720d;" aria-hidden="true"></i> ({{SoLuongHVDangKy}})</span>
+                        </div>
+                      </a>
+                    </div>
+
+                    <div class="px-3 my-3 text-center">
+                      <div class="cart-item-label">${{giaMoi}}</div><span class="text-xl font-weight-medium"><strike
+                          class="text-danger">${{HocPhi}}</strike></span>
+                    </div>
+                    <div class="px-3 my-3 text-center">
+                      <span class="badge badge-danger ml-3"><i class="far fa-clock pr-1"></i>Bestseller</span>
+                    </div>
+
+
+                    <form action="/user/my-watchlist/remove" method="post" id="frmRemoverCourse">
+                      <input type="hidden" name="IdKhoaHoc" id="IdKhoaHoc">
+                      <input type="hidden" name="idHocVien" id="idHocVien" value="{{idHocVien}}">
+                    </form>
+                  </div>
+                  {{/each}}
+                </div>
+                {{!--
+              </div>
+            </div> --}}
+          </div>
+        {{!-- </div> --}}
+      </div>
+    </main>
+  </div>
+</div>

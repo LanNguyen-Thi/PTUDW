@@ -1,0 +1,121 @@
+{{#section 'header'}}
+<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+{{/section}}
+{{#section 'footer'}}
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+
+   <script>
+    $(document).ready(function(){
+            var options = {
+                max_value: 5,
+                step_size: 0.5,
+                
+            }
+    $(".rate").rate(options);
+
+    })
+   </script>
+   <script>
+     $( "#leave-rating" ).click(function() {
+
+});
+   </script>
+
+{{/section}}
+  <header>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          {{#with detailCourse}}
+              <a class="navbar-brand"><h4 class="font-weight-bold">{{TenKhoaHoc}}</h4></a>
+          {{/with}}
+          <div id="leave-rating"><i class="fas fa-star"></i> <a class="text-decoration-none" href="#" alt="leave-rating"><span>Leave a rating</span></a></div>
+        </div>
+      </nav>
+</header>
+    <div>
+        <div class="row">
+          {{#if empty}}
+          <div class="col-12 col-md-9">
+                <div class="d-flex justify-content-center">
+                    <h1>Bài học này hiện tại chưa có video, vui lòng quay lại sau</h1>
+                </div>
+                
+            </div>
+            
+          {{else}}
+             <div class="col-12 col-md-9">
+                <div class="d-flex justify-content-center">
+                    <video id="my-video" class="video-js" controls preload="auto" width="100%" height="500" poster="../img/CSS3.png" data-setup="{}"  >
+                        <source src="{{video.DiaChi}}" type="video/mp4" />
+                       <p class="vjs-no-js">
+                       Để xem video này, vui lòng bật JavaScript và xem xét nâng cấp lên trình duyệt web
+                       <a href="https://videojs.com/html5-video-support/" target="_blank"> supports HTML5 video</a>
+                       </p>
+                   </video>
+                </div>
+                
+            </div>
+          {{/if}}
+           
+            <div class="col-6 col-md-3">
+               <!--Course content-->
+               <article class="panel-group bs-accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                   <!--SEction-->
+                    {{#each listOfChapter}}
+                     
+                   
+                <section class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading-01">
+                      <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#section-{{idChuongKhoaHoc}}" aria-expanded="false" aria-controls="section-{{idChuongKhoaHoc}}">
+                          Section {{@index}}: {{TenChuong}}
+                          <p class="text-muted">{{SoVideoDaHoc}}/{{SoVideoCuaChuong}}</p>
+                          <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="section-{{idChuongKhoaHoc}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{idChuongKhoaHoc}}">
+                      <div class="panel-body">
+                        <ol>
+                          {{#each lessons}}
+                          
+                             <div class="d-flex flex-row">
+                            <li class=" {{#if isActive}}font-weight-bold{{/if}} mr-2"><a class="{{#if isActive}}text-danger{{/if}}" href="/user/view-video/{{video.idVideo}}&{{../IdKhoaHoc}}" id="section1-lesson 1">{{TenBaiHoc}}</a></li>
+                               <div class="form-check pl-0">
+                                 <form action="/user/view-video/add-remove/{{video.idVideo}}" method = "POST" id="frm-{{video.idVideo}}" class="frmCheck">
+                                <input type="checkbox" class="form-check-input" id="check{{video.idVideo}}" name="idVideo" {{#if viewed}}checked{{/if}}>
+                                <label class="form-check-label" for="check{{video.idVideo}}"></label>
+                              </form> 
+                              </div>
+                            </div>
+                          {{/each}}
+                        </ol>
+                      </div>
+                    </div>
+                  </section>
+                  {{/each}}
+                  <!--End section .//-->
+               </article>
+              <!--End course content .//-->
+          </div> 
+               
+         
+    </div>
+    <!--Tab section .//-->
+   
+        <!--Scrip javascript-->
+        <script src="../bootstrap-4.5.3-dist/js/bootstrap.js"></script> 
+        <script>
+         $('[data-toggle="buttons"] .btn').on('click', function () {
+        // toggle style
+         $(this).toggleClass('btn-outline-danger btn-success active');
+            return false;
+        });
+        </script>
+        <script>
+          $('.frmCheck').change(function() {
+            let id = '#'+ this.id
+            $(id).submit()
+          });
+        </script>

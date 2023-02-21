@@ -1,0 +1,438 @@
+{{#section 'header'}}
+<link rel="stylesheet" href="/css/rating.css">
+{{/section}}
+{{#section 'footer'}}
+<script>
+  $('.addCourse').on('click', function () {
+    const id = $(this).data('id');
+    $('#IdKhoaHoc').val(id);
+    $('#frmAddCourse').submit();
+  });
+</script>
+
+<script>
+  $('.addWishList').on('click', function () {
+    const id = $(this).data('id');
+    $('#IdKhoaHoc-WishList').val(id);
+    $('#frmAddWishList').submit();
+
+  });
+
+
+</script>
+<script>
+  $(".rating").each(function () {
+    var newoptions = {
+      max_value: 5,
+      step_size: 0.5,
+      readonly: true,
+      initial_value: $(this).attr('value'),
+    }
+    $(this).rate(newoptions);
+  });
+</script>
+<!--Rating-->
+
+<!--Rating .// -->
+<script>
+  $(document).ready(function () {
+    var options = {
+      max_value: 5,
+      step_size: 0.5,
+
+    }
+    $(".rate").rate(options);
+    $(".rate").on("afterChange", function (ev, data) {
+      $("#selected_rating").val(data.to);
+
+    });
+  })
+
+
+</script>
+
+{{/section}}
+<!--Form add wishList-->
+<form action="/user/my-watchlist/add" method="post" id="frmAddWishList">
+  <input type="hidden" name="IdKhoaHoc" id="IdKhoaHoc-WishList">
+  <input type="hidden" name="idHocVien" id="idHocVien-WishList" value="{{stuAccount.idHocVien}}">
+</form>
+<!--Add add wishList .//-->
+{{#with this.detCourse}}
+<form action="/cart/add" method="post" id="frmAddCourse">
+  <input type="hidden" name="IdKhoaHoc" id="IdKhoaHoc">
+</form>
+
+<section class="product-details mt-5">
+  <div class="container-fluid bg-info">
+    <div class="row">
+      <!--First section-->
+      <div class="col-lg-6 ml-5">
+        <h1 class="text-center">{{TenKhoaHoc}}</h1>
+        <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center">
+            <img src="../img/large-course-img.jpg" alt="img-course">
+          </div>
+        </div>
+
+        <div class="card card-cascade wider reverse">
+          <div class="card-body card-body-cascade bg-card">
+
+            <!-- Title -->
+            <h4 class="card-title"><strong>What you'll learn</strong></h4>
+            <h4 class="card-title"><strong>What you'll learn</strong></h4>
+            {{{MoTaChiTiet}}}
+            <button onclick="showMore()" style="background-color: Transparent; border-style:none" id="myBtn">Read
+              more</button>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!--End first Section .//-->
+      <!--Course information-->
+      <div class=" col-lg-6 col-xl-5 bg-infoCourse shadow-lg p-3 mb-5 rounded">
+        <div>
+          <div>
+            <ul class="list-inline mb-2 mb-sm-0">
+              {{#if KhuyenMai}}
+              <li class="list-inline-item h4 font-weight-light mb-0 strike">{{giaMoi}} $</li>
+              <li class="list-inline-item text-muted font-weight-light">
+                <del class="strike-price">{{format HocPhi}} $</del>
+              </li>
+              {{else}}
+              <li class="list-inline-item h4 font-weight-light mb-0 strike">{{HocPhi}}$</li>
+              {{/if}}
+
+            </ul>
+            <div>
+              <ul class="list-inline mr-2 mb-0">
+                <li class="list-inline-item mr-0"><i class="fa fa-star yellow-text"></i></li>
+                <li class="list-inline-item mr-0"><i class="fa fa-star yellow-text"></i></li>
+                <li class="list-inline-item mr-0"><i class="fa fa-star yellow-text"></i></li>
+                <li class="list-inline-item mr-0"><i class="fa fa-star yellow-text"></i></li>
+                <li class="list-inline-item mr-0"><i class="fa fa-star text-muted"></i></li>
+                <li class="list-inline-item"> <em>({{SoLuongHVDanhGia}} ratings)</em></span></li>
+              </ul><span class="text-muted text-sm">{{SoLuongHVDangKy}} students</span> <span
+                class="badge badge-success ml-3"><i class="far fa-clock pr-1"></i>{{LastUpdate}}</span>
+              <span>Last updated</span>
+            </div>
+          </div>
+
+          <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A3PDXmYoF5U"
+              allowfullscreen></iframe>
+          </div>
+
+          <p class="mb-4 text-white">{{MoTaNgan}}</p>
+          <form action="#">
+            <ul class="list-inline d-flex justify-content-center">
+              <li class="list-inline-item">
+                <a data-id="{{IdKhoaHoc}}" href="javascript:;" role="button" class="btn btn-primary addCourse">
+                  <i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                <a data-id="{{IdKhoaHoc}}" href="javascript:;" role="button" class="btn btn-outline-danger addWishList">
+                  <i class="fa fa-heart" aria-hidden="true"></i>Add
+                  to wishlist</a>
+
+              </li>
+              <li class="list-inline-item"><a class="btn btn-danger" href="#"> Buy now</a></li>
+            </ul>
+          </form>
+          <div class="container">
+
+            <header class="page-header">
+              <h1>Course content</h1>
+            </header>
+            <main>
+              <!--Course content-->
+              <article class="panel-group bs-accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                {{#each ../chapters}}
+                <section class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" data-parent="#accordion"
+                        href="#collapse{{idChuongKhoaHoc}}" aria-expanded="true" aria-controls="collapseOne">
+                        Chapter {{@index}}: {{TenChuong}}
+                        <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapse{{idChuongKhoaHoc}}" class="panel-collapse collapse in" role="tabpanel"
+                    aria-labelledby="headingOne">
+                    <div class="panel-body">
+                      <ul>
+                        {{#each lessons}}
+                        <li><a href="#" id="link01-01">{{TenBaiHoc}}</a> </li>
+                        {{/each}}
+
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+                {{/each}}
+
+
+
+              </article>
+              <!--End course content .//-->
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Detail info/teacher info/ feedback-->
+<main>
+  <div class="container mt-5">
+    <!-- Classic tabs -->
+    <div class="classic-tabs">
+      <!--Tab title-->
+      <ul class="nav tabs-primary nav-justified" id="advancedTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info"
+            aria-selected="false">TEACHER INFORMATION</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews"
+            aria-selected="false">FEEDBACK({{SoLuongHVDanhGia}})</a>
+        </li>
+
+      </ul>
+      <!--Tab title .//-->
+      <div class="tab-content" id="advancedTabContent">
+        <!--Teacher description-->
+
+        <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+          <div class="row p-2 bg-white border rounded">
+            <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
+                src="../img/new_teacher.jpeg"></div>
+            <div class="col-md-9 mt-1">
+              <h5>{{TenGiangVien}}</h5>
+              <div class="d-flex flex-row">
+                <ul class="list-unstyled teacher-list">
+                  <li> <i class="fa fa-star" aria-hidden="true"></i> {{NgSinh}}</li>
+                  <li><i class="fa fa-play-circle" aria-hidden="true"></i> {{Email}}</li>
+                  <li><i class="fa fa-graduation-cap" aria-hidden="true"></i> {{SoLuongHVDangKy}} Students</li>
+                  {{#each teacher}}
+                  <li><i class="fa fa-book" aria-hidden="true"></i> {{SoKhoaHoc}} Courses</li>
+                  {{/each}}
+
+                </ul>
+              </div>
+              <div>
+                <p>{{{MoTa}}}</p>
+
+                <button onclick="showMore()" id="myBtn" class="btn btn-default">Read more</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Teacher description .//-->
+
+        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+          <h5><span>{{SoLuongHVDanhGia}}</span> review for <span>{{TenKhoaHoc}}</span></h5>
+
+          <div class="col-xs-12 col-md-6">
+            <div class="well well-sm">
+              <div class="row">
+                <div class="col-xs-12 col-md-6 text-center">
+                  <h1 class="rating-num">
+                    {{DiemDanhGia}}</h1>
+                  <div>
+                    <span class="glyphicon glyphicon-user"></span>{{SoLuongHVDanhGia}} total
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <div class="row rating-desc">
+                    <div class="col-xs-3 col-md-3 text-right">
+                      <span class="glyphicon glyphicon-star"></span>5
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                      <div class="progress progress-striped ">
+                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 80%">
+                          <span class="sr-only">80%</span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end 5 -->
+                    <div class="col-xs-3 col-md-3 text-right">
+                      <span class="glyphicon glyphicon-star"></span>4
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                      <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 60%">
+                          <span class="sr-only">60%</span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end 4 -->
+                    <div class="col-xs-3 col-md-3 text-right">
+                      <span class="glyphicon glyphicon-star"></span>3
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                      <div class="progress">
+                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 40%">
+                          <span class="sr-only">40%</span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end 3 -->
+                    <div class="col-xs-3 col-md-3 text-right">
+                      <span class="glyphicon glyphicon-star"></span>2
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                      <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 20%">
+                          <span class="sr-only">20%</span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end 2 -->
+                    <div class="col-xs-3 col-md-3 text-right">
+                      <span class="glyphicon glyphicon-star"></span>1
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                      <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 15%">
+                          <span class="sr-only">15%</span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end 1 -->
+                  </div>
+                  <!-- end row -->
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/with}}
+          <!--Display student's reviews-->
+          {{#each this.feedback}}
+          <div class="media mt-3 mb-4">
+            <img class="d-flex mr-3 z-depth-1" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg"
+              width="62" alt="Generic placeholder image">
+            <div class="media-body">
+              <div class="d-flex justify-content-between">
+                <p class="mt-1 mb-2">
+                  <strong>{{TenHocVien}} </strong>
+                  <span>– </span><span>{{NgayDanhGia}}</span>
+                </p>
+
+                <ul class="mb-0">
+                  <div class="rating" style="font-size: 20px;" value="{{Diem}}" id="rating{{IdKhoaHoc}}{{idHocVien}}">
+                  </div>
+                </ul>
+              </div>
+              <p class="mb-0">{{{NhanXet}}}</p>
+            </div>
+          </div>
+          {{/each}}
+          <!--End student's reviews .//-->
+          <hr>
+          {{#if courseAuth}}
+
+          {{#if checkComment}}
+          <h5 class="mt-4">Add a review</h5>
+          <!--Leave a rating-->
+          <div class="form-group">
+            <form action="/detail-course/{{detCourse.IdKhoaHoc}}/addComment" method="POST" id="addComment">
+              <input type="hidden" id="selected_rating" name="selected_rating" value="0" required="required">
+              <div class="rate" style="font-size: 25px;"></div>
+
+          </div>
+          <!--End leave rating .//-->
+
+          <div>
+            <!-- Add review -->
+            <div class="md-form md-outline">
+              <textarea id="form76" class="md-textarea form-control pr-6" rows="4" form="addComment"
+                name="comment"></textarea>
+              <label for="form76">Your review</label>
+            </div>
+            <!--End add review-->
+            <div class="text-right pb-2">
+              <button type="submit" class="btn btn-primary">Send review</button>
+            </div>
+          </div>
+          </form>
+          {{/if}}
+
+          {{/if}}
+
+        </div>
+      </div>
+    </div>
+    <!-- Classic tabs -->
+    <hr>
+    <!--Top related course-->
+    <div class="container pb-5 mb-2">
+      {{#if relatedCourse}}
+      <h2 class="text-center text-info">Students also bought</h2>
+      {{else}}
+      <h2 class="text-center text-info">No related courses to display</h2>
+      {{/if}}
+      {{#each relatedCourse}}
+      <div class="cart-item d-md-flex justify-content-between">
+        <div class="px-3 my-3">
+          <a class="cart-item-product" href="#">
+            <div class="cart-item-product-thumb"><img src="/img/course-img.png" alt="Product"></div>
+            <div class="cart-item-product-info">
+              <h4 class="cart-item-product-title">{{TenKhoaHoc}}<span class="badge badge-danger ml-3"><i
+                    class="far fa-clock pr-1"></i>Bestseller</span></h4><span><strong>Last update:</strong>
+                {{LastUpdate}}</span><span><strong>Rating</strong> {{DiemDanhGia}}<i class="fa fa-star"
+                  style="color: #e6720d;" aria-hidden="true"></i></span>
+            </div>
+          </a>
+        </div>
+        <div class="px-3 my-3 text-center">
+          <div class="cart-item-label">Viewers</div><span class="text-xl font-weight-medium">{{SoLuongHVDangKy}}<i
+              class="fa fa-users" aria-hidden="true"></i></span>
+        </div>
+        <div class="px-3 my-3 text-center">
+          <div class="cart-item-label">{{giaMoi}}</div><span
+            class="text-xl font-weight-medium"><strike>{{HocPhi}}</strike></span>
+        </div>
+        <div class="px-3 my-3 text-center">
+          <a class="btn  btn-default addCourse" data-id="{{IdKhoaHoc}}" href="javascript:;" role="button"><i
+              class="fa fa-cart-plus" aria-hidden="true"></i></i></a>
+          <a data-id="{{IdKhoaHoc}}" href="javascript:;" role="button" class="btn btn-outline-danger addWishList"> <i
+              class="fa fa-heart" aria-hidden="true"></i></a>
+
+        </div>
+      </div>
+      {{/each}}
+
+    </div>
+
+  </div>
+</main>
+
+<!--Jquery link-->
+<script src="/bootstrap-4.5.3-dist/js/bootstrap.js"></script>
+<script src="/js/detail.js"></script>
+<!--Script Jquery-->
+<script>
+  function showMore() {
+    var dots = document.getElementById("dots");
+    var moreText = document.getElementById("more");
+    var btnText = document.getElementById("myBtn");
+
+    if (dots.style.display === "none") {
+      dots.style.display = "inline";
+      btnText.innerHTML = "Read more";
+      moreText.style.display = "none";
+    } else {
+      dots.style.display = "none";
+      btnText.innerHTML = "Read less";
+      moreText.style.display = "inline";
+    }
+  }
+</script>

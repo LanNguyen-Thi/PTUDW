@@ -1,0 +1,93 @@
+{{#section 'header'}}
+<link rel=" stylesheet" href="/css/styles.css" />
+{{/section}}
+{{#section 'footer'}}
+
+
+
+<script>
+    $('.createAcc').on('click', function () {
+        var username = Math.random().toString(36).slice(-8)
+        var password = Math.random().toString(36).slice(-8)
+        $('#username').val(username)
+        $('#password').val(password)
+        $('#frmCreateAcc').submit();
+    });
+</script>
+{{/section}}
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">CATEGORIES</div>
+
+                    <a class="nav-link" href="/admin/allcategories">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        All categories
+                    </a>
+                    <a class="nav-link" href="/admin/addcategories">
+                        <div class="sb-nav-link-icon"><i class="fas fa-plus-square"></i></div>
+                        Add categories
+                    </a>
+                    <div class="sb-sidenav-menu-heading">COURSES</div>
+                    <a class="nav-link" href="/admin/allcourses">
+                        <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                        All courses
+                    </a>
+                    <div class="sb-sidenav-menu-heading">USER MANAGEMENT</div>
+                    <a class="nav-link" href="/admin/allusers">
+                        <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                        All users
+                    </a>
+                    <a class="nav-link" href="/admin/add-teacher">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
+                        Add teacher
+                    </a>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h2 class="mt-4">Thêm giảng viên</h2>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table mr-1"></i>
+                        Add teacher
+                    </div>
+                    <form action="/admin/createAcc" method="POST" id="frmCreateAcc">
+                        <input type="hidden" name="username" id="username">
+                        <input type="hidden" name="password" id="password">
+
+                        <div class="ml-3 mt-3 mb-3">
+                            <a role="submit" class="btn btn-primary createAcc">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                Add a teacher
+                            </a>
+                        </div>
+                    </form>
+                    {{#if username}}
+                    <div class="card-body" id="result">
+                        <h4 style="color: blue">Tài khoản giảng viên mới </h4>
+                        <div class="row ml-3">
+                            <p class="text-danger font-weight-bold">Username: &nbsp;</p>
+                            <div>{{username}}</div>
+                        </div>
+                        <div class="row ml-3">
+                            <p class="text-danger font-weight-bold">Password: &nbsp;</p>
+                            <div><p>{{password}}</p></div>
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </main>
+    </div>
+
+</div>

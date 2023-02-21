@@ -1,0 +1,141 @@
+{{#section 'header'}}
+<link rel=" stylesheet" href="/css/styles.css" />
+{{/section}}
+
+{{#section 'footer'}}
+ <script>
+        $('#fuMain').fileinput({
+            theme: 'fa',
+            dropZoneEnabled: true,
+            allowedFileExtensions: ['png', 'jpg', 'gif'],
+        });
+        </script>
+
+        <script>
+             $('.addLesson').on('click', function () {
+            $('.Lesson').append(` <div class="card-body">
+                                    <div>
+                                    <nav class="navbar navbar-expand navbar-light bg-light mb-4">
+                                         <input type="text" name="Lesson"
+                                        placeholder="Tên bài học" required>
+                                        <ul class="navbar-nav ml-auto">
+                                            <li class="nav-item dropdown">
+                                            
+                                                <div>
+                                                    <input type="file" class="form-control" name="video" required>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    </div>
+                                </div>`)
+            });             
+            
+        </script>
+{{/section}}
+<form action="/teacher/addLesson" method="post">
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">COURSES</div>
+                    <a class="nav-link" href="/teacher/allmycourses">
+                        <div class="sb-nav-link-icon"><i class="fas fa-folder-open"></i></div>
+                        All my courses
+                    </a>
+                    <a class="nav-link" href="/teacher/addnewcourse">
+                        <div class="sb-nav-link-icon"><i class="fas fa-folder-plus"></i></div>
+                        Add new course
+                    </a>
+                    {{!-- <a class="nav-link" href="/teacher/editcourse">
+                        <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
+                        Edit course
+                    </a> --}}
+                    
+                    <div class="sb-sidenav-menu-heading">MY PROFILE</div>
+                    <a class="nav-link" href="/teacher/profile">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                        My profile
+                    </a>
+                    <a class="nav-link" href="/teacher/editprofile">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
+                        Edit my profile
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h2 class="mt-4">My courses</h2>
+
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <i class="fas fa-plus mr-1"></i>
+                        Thêm bài học
+                    </div>
+                    <div class="card-body">
+                            <div class="form-group">
+
+                            
+                <div class="container-fluid">
+                    <h3 class="mb-1 text-gray-800 text-danger">Thêm bài học</h3>
+                    <p class="mb-2">Chọn chương</p> 
+                    <div class="row mt-2 Chapters">
+                
+                    <select class="mr-2 form-control mb-2" id="option" name="idChuongKhoaHoc">
+                        {{#each chapters}}
+                            <option value="{{idChuongKhoaHoc}}" >{{TenChuong}}</option>
+                        {{/each}}
+                    
+                    </select>
+                    <button class="btn btn-info addLesson"> <i class="fa fa-plus"></i></button>
+
+                    </div>
+                    <div class="Lesson"></div>
+                </div>                       
+                </div>
+
+                </div>
+                <!-- /.container-fluid -->
+            <!-- Danh sách chương -->
+                            
+                              
+
+                               
+                            </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+</form>
+
+{{#section 'footer'}}
+{{!-- <script>
+    (function ($) {
+        "use strict";
+        // Add active state to sidbar nav links
+        var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function () {
+            if (this.href === path) {
+                $(this).addClass("active");
+            }
+        });
+        // Toggle the side navigation
+        $("#sidebarToggle").on("click", function (e) {
+            e.preventDefault();
+            $("body").toggleClass("sb-sidenav-toggled");
+        });
+    })(jQuery);
+</script> --}}
+{{/section}}

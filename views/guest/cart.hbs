@@ -1,0 +1,148 @@
+{{#section 'footer'}}
+<script>
+  $('.removeCourse').on('click', function () {
+    const id = $(this).data('id');
+    $('#IdKhoaHoc').val(id);
+    $('#frmRemoverCourse').submit();
+  });
+</script>
+
+<script>
+  $('.buyCourse').on('click', function () {
+    $('#frmbuyCourse').submit();
+  });
+</script>
+
+{{/section}}
+
+<div id="layoutSidenav">
+  <div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+      <div class="sb-sidenav-menu">
+        <div class="nav">
+          {{!-- <div class="sb-sidenav-menu-heading">Core</div>
+          <a class="nav-link" href="index.html">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Dashboard
+          </a> --}}
+          <div class="sb-sidenav-menu-heading">CATEGORIES</div>
+          {{#each lcCategories}}
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts"
+            aria-expanded="false" aria-controls="collapseLayouts">
+            <div class="sb-nav-link-icon"><i class="fas fa-chalkboard"></i></div>
+            {{TenLinhVuc}}
+            <div class="button sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+          </a>
+          <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+            <nav class="sb-sidenav-menu-nested nav">
+              {{#each level2}}
+              <a class="nav-link" href="/courses/{{idLinhVucCap2}}">{{TenLinhVucCap2}}</a>
+              {{/each}}
+            </nav>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid">
+        {{!-- DEMO --}}
+        <div class="container">
+
+          <!--Section: Block Content-->
+          <section class="mt-5 mb-4">
+
+            <!--Grid row-->
+            <div class="row">
+
+              <!--Grid column-->
+              <div class="col-lg-8">
+
+                <!-- Card -->
+                <div class="card wish-list mb-4">
+                  <div class="card-body">
+
+                    <h5 class="mb-4">Cart (<span>{{nCourse}}</span> items)</h5>
+                    <!--List cart-->
+                    <div>
+                      <!--Course-->
+                      <form action="/cart/remove" method="post" id="frmRemoverCourse">
+                        <input type="hidden" name="IdKhoaHoc" id="IdKhoaHoc">
+                      </form>
+                      {{#each cartList}}
+                      {{#with detCourse}}
+
+                      <div class="row p-2 bg-white border rounded mt-2">
+                        <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
+                            src="../img/onlCourse.jpg"></div>
+                        <div class="col-md-5 mt-1">
+                          <h5>{{TenKhoaHoc}}</h5>
+                          <div class="d-flex flex-row">
+                          </div>
+                          <p class="text-justify text-truncate para mb-0">{{MoTaNgan}}<br><br></p>
+                        </div>
+                        <div class="col-md-4 border-left mt-1">
+                          <div class="d-flex flex-row align-items-center text-danger">
+                            <i class="fa fa-tags" aria-hidden="true"></i> <span>${{giaMoi}}</span>
+                          </div>
+                          <div class="d-flex justify-content-center mt-4"><button class="btn btn-primary btn-sm"
+                              type="button">Add to wishlist</button><a data-id="{{IdKhoaHoc}}" href="javascript:;"
+                              role="button" class="btn btn-outline-danger btn-sm mt-2 removeCourse"
+                              type="button">REMOVE</a></div>
+                        </div>
+                      </div>
+                      {{/with}}
+                      {{/each}}
+
+                      <!--End course .//-->
+                    </div>
+                    <!--List cart .//-->
+
+
+                    <hr class="mb-4">
+                    <p class="text-primary mb-0"><i class="fas fa-info-circle mr-1"></i> Do not delay the purchase,
+                      adding
+                      items to your cart does not mean booking them.</p>
+
+                  </div>
+                </div>
+                <!-- Card -->
+
+              </div>
+              <!--Grid column-->
+
+              <!--Grid column-->
+              <div class="col-lg-4">
+
+                <!-- Card -->
+                <div class="card mb-4">
+                  <div class="card-body">
+
+                    <h5 class="mb-3">Total</h5>
+                    <div class="d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                      Temporary amount
+                      <span class="text-danger font-weight-bold">${{total}}</span>
+                    </div>
+                    <form action="/cart/checkout" method="post" id="frmbuyCourse">
+                    </form>
+                    <a href="javascript:;" role="button"
+                      class="btn btn-danger btn-block waves-effect waves-light buyCourse">checkout</a>
+
+                  </div>
+                </div>
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Grid row-->
+
+          </section>
+          <!--Section: Block Content-->
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+</div>

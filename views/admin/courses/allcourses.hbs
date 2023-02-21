@@ -1,0 +1,221 @@
+{{#section 'header'}}
+<link rel=" stylesheet" href="/css/styles.css" />
+<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+{{/section}}
+{{#section 'footer'}}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#Search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").not(":first").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+<script>
+    $('.delCourse').on('click', function () {
+        const id = $(this).data('id');
+        $('#IdKhoaHoc').val(id);
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa?',
+            text: "Tất cả những nội dung liên quan đến khóa học đều sẽ bị xóa và không thể khôi phục",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                $('#frmDelCourse' + id).submit();
+
+            }
+        })
+    });
+</script>
+<script>
+
+    $('.approveCourse').on('click', function () {
+
+        const id = $(this).data('id');
+        const frmId = '#frmApproveCourse' + id
+        $(frmId).submit();
+    });
+</script>
+
+<script>
+    $("#option").on("change", function () {
+
+        var opt = $(this).val();
+        if (opt == '0') { $('tr').show(); return }
+        $("tr").each(function () {
+            var tr = $(this);
+            tr.show();
+            if (!tr.hasClass(opt)) {
+                tr.hide();
+            }
+            if (opt == "zero") {
+                tr.show();
+            }
+        });
+    });
+</script>
+<script>
+    $('.approveCourse').on('click', function () {
+        if ($(this).hasClass('btn-info')) {
+            $(this).toggleClass("btn-info btn-danger");
+            $(this).find('svg').attr('data-icon', 'lock');
+        } else {
+            $(this).toggleClass("btn-danger btn-info");
+            $(this).find('svg').attr('data-icon', 'lock-open');
+        }
+    });
+</script>
+{{/section}}
+
+
+
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">CATEGORIES</div>
+
+                    <a class="nav-link" href="/admin/allcategories">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        All categories
+                    </a>
+                    <a class="nav-link" href="/admin/addcategories">
+                        <div class="sb-nav-link-icon"><i class="fas fa-plus-square"></i></div>
+                        Add categories
+                    </a>
+                    <div class="sb-sidenav-menu-heading">COURSES</div>
+                    <a class="nav-link" href="/admin/allcourses">
+                        <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                        All courses
+                    </a>
+                    <div class="sb-sidenav-menu-heading">USER MANAGEMENT</div>
+                    <a class="nav-link" href="/admin/allusers">
+                        <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                        All users
+                    </a>
+                    <a class="nav-link" href="/admin/add-teacher">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
+                        Add teacher
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h2 class="mt-4">Quản lý khóa học</h2>
+                {{!-- <h6>Lĩnh vực</h6> --}}
+                
+                {{!-- <div class="input-group">
+                    <input id="Search" type="text" class="form-control bg-light border-0 small"
+                        placeholder="Tìm kiếm ..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                    </div>
+                </div> --}}
+
+                <!-- DataTales Example -->
+                <div class="card mb-4 mt-2">
+                    <div class="card-header form-group row">
+                            <div class="col-6">
+                                <select class="mr-2 form-control mb-2" id="option" name="category">
+                                    <option value="0">Tất cả lĩnh vực</option>
+                    {{#each lcCategories}}
+                    {{#each level2}}
+
+
+                    <option value="{{idLinhVucCap2}}">{{TenLinhVucCap2}}</option>
+                    {{/each}}
+                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group mb-2">
+                                    <input class="form-control" id="Search" type="search" placeholder="Tìm kiếm"
+                                        aria-label="Search">
+                                </div>
+                            </div>
+                        </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                                <thead>
+
+                                    <tr>
+                                        <th>Id Khóa học</th>
+                                        <th>Tên Khóa Học</th>
+                                        <th>Lĩnh vực</th>
+                                        <th>Người dạy</th>
+                                        <th>Cập nhật cuối</th>
+                                        <th>Xem chi tiết</th>
+                                        <th>Hiển thị</th>
+                                        <th>Xóa</th>
+                                    </tr>
+                                </thead>
+                                <tbody id='tableKH'>
+                                    
+                                    
+                                </tbody>
+                                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" id="buttongr"></div>
+                                     <div class="btn-group me-2" role="group" aria-label="First group" ></div>
+
+                                        
+                                    </div>
+                            </table>
+                        </div>
+                    </div>`
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+</div>
+<script src='/js/ultis.js'>
+
+</script>
+<script>
+    function showCourses(number)
+    {
+        $.ajax(
+            {
+                url:'/admin/allcourses/'+number,
+                type:'POST',
+                dataType:'JSON',
+                success: function(data)
+                {
+                    fillKH(data);
+                }
+            }
+        )
+    }
+    $.ajax({
+        url:'/admin/slkh',
+        type:'POST',
+        dataType:'JSON',
+        success:function(data)
+        {
+            console.log(data)
+            fillNumberButton(data.slkh);
+        }
+    })
+    
+    showCourses(1);
+    
+</script>

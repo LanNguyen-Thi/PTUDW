@@ -1,0 +1,205 @@
+{{#section 'header'}}
+<link rel=" stylesheet" href="/css/styles.css" />
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{{/section}}
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">COURSES</div>
+                    <a class="nav-link" href="/teacher/allmycourses">
+                        <div class="sb-nav-link-icon"><i class="fas fa-folder-open"></i></div>
+                        All my courses
+                    </a>
+                    <a class="nav-link" href="/teacher/addnewcourse">
+                        <div class="sb-nav-link-icon"><i class="fas fa-folder-plus"></i></div>
+                        Add new course
+                    </a>
+                    {{!-- <a class="nav-link" href="/teacher/editcourse">
+                        <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
+                        Edit course
+                    </a> --}}
+                    <div class="sb-sidenav-menu-heading">MY PROFILE</div>
+                    <a class="nav-link" href="/teacher/profile">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                        My profile
+                    </a>
+                    <a class="nav-link" href="/teacher/editprofile">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
+                        Edit my profile
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h2 class="mt-4">My profile</h2>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table mr-1"></i>
+                        My profile
+                    </div>
+                    <div class="card-body">
+                        <div class="single-pro-review-area mt-t-30 mg-b-15">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form>
+                                            <div class="form-group row">
+                                                <label for="firstname" class="col-2 col-form-label">First name</label>
+                                                <div class="col-10">
+                                                    <input id="firstname" name="firstname" placeholder="First name"
+                                                        class="form-control here" required="required" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="lastname" class="col-2 col-form-label">Last Name</label>
+                                                <div class="col-10">
+                                                    <input id="lastname" name="lastname" placeholder="Last Name"
+                                                        class="form-control here" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="bigtitle" class="col-2 col-form-label">Big Title</label>
+                                                <div class="col-10">
+                                                    <input id="bigtitle" name="bigtitle"
+                                                        placeholder="Example: Teacher at University of Science"
+                                                        class="form-control here" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="biography" class="col-2 col-form-label">Biography</label>
+                                                <div class="col-10">
+                                                    <textarea id="publicinfo" name="publicinfo" cols="40" rows="4"
+                                                        class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="select" class="col-2 col-form-label">Languages
+                                                </label>
+                                                <div class="col-10">
+                                                    <select id="languageSelect" name="languageSelect"
+                                                        class="custom-select">
+                                                        <option value="default">Vietnamese</option>
+                                                        <option value="id_ID">Bahasa Indonesia</option>
+                                                        <option value="de_DE">Deutsch</option>
+                                                        <option value="en_US">English (US)</option>
+                                                        <option value="es_ES">Español (España)</option>
+                                                        <option value="fr_FR">Français (France)</option>
+                                                        <option value="it_IT">Italiano</option>
+                                                        <option value="nl_NL">Nederlands</option>
+                                                        <option value="pl_PL">Polski</option>
+                                                        <option value="pt_BR">Português (Brasil)</option>
+                                                        <option value="ro_RO">Română</option>
+                                                        <option value="tr_TR">Türkçe</option>
+                                                        <option value="ru_RU">Русский</option>
+                                                        <option value="th_TH">ภาษาไทย</option>
+                                                        <option value="zh_TW">中文 (繁體)</option>
+                                                        <option value="zh_CN">中文(简体)</option>
+                                                        <option value="ja_JP">日本語</option>
+                                                        <option value="ko_KR">한국어</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="website" class="col-2 col-form-label">Website</label>
+                                                <div class="col-10">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon3"
+                                                                placeholder="username">https://example.com/</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="basic-url"
+                                                            aria-describedby="basic-addon3">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="website" class="col-2 col-form-label">Facebook</label>
+                                                <div class="col-10">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon3"
+                                                                placeholder="username">https://www.facebook.com/</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="basic-url"
+                                                            aria-describedby="basic-addon3">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="website" class="col-2 col-form-label">LinkedIn</label>
+                                                <div class="col-10">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon3"
+                                                                placeholder="username">https://www.linkedin.com/</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="basic-url"
+                                                            aria-describedby="basic-addon3">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="website" class="col-2 col-form-label">Youtube</label>
+                                                <div class="col-10">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon3"
+                                                                placeholder="username">https://www.youtube.com/</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="basic-url"
+                                                            aria-describedby="basic-addon3">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="offset-4 col-10">
+                                                    <button name="submit" type="submit" class="btn btn-primary">Update
+                                                        My
+                                                        Profile</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+{{#section 'footer'}}
+<script>
+    (function ($) {
+        "use strict";
+
+        // Add active state to sidbar nav links
+        var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function () {
+            if (this.href === path) {
+                $(this).addClass("active");
+            }
+        });
+
+        // Toggle the side navigation
+        $("#sidebarToggle").on("click", function (e) {
+            e.preventDefault();
+            $("body").toggleClass("sb-sidenav-toggled");
+        });
+    })(jQuery);
+
+</script>
+{{/section}}
